@@ -598,4 +598,4 @@ _BoshComplete ()   #  By convention, the function name
   return 0
 }
 
-complete -F _BoshComplete -o filenames bo bosh
+complete -F _BoshComplete bo bosh -o filenames

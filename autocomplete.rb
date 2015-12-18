@@ -89,7 +89,7 @@ EOF
   return 0
 }
 
-complete -F _BoshComplete -o filenames bo bosh
+complete -F _BoshComplete bo bosh -o filenames
 EOF
     end
   end
