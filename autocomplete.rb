@@ -34,6 +34,8 @@ module Bosh::Cli::Command
           link = link[cmd]
         end
 
+        link[''] = {}
+
         command.options.each do | option |
           link[option[0].split(/\s/)[0]] = {}
         end
@@ -59,6 +61,13 @@ EOF
 
     def print_wordtree(level, wordtree)
       indent = '  ' + ' ' * ((level - 1) * 2)
+
+      if 1 == wordtree.keys.length && wordtree.has_key?('')
+        puts indent + "return 0"
+
+        return
+      end
+
       puts indent + "case \"${COMP_WORDS[#{level}]}\" in"
 
       wordtree.each do | word, children |
@@ -70,7 +79,7 @@ EOF
       end
 
       puts indent + "  *)"
-      puts indent + "    COMPREPLY=( $( compgen -W '#{wordtree.keys.join(' ')}' -- $cur ) )"
+      puts indent + "    COMPREPLY=( $( compgen -W '#{wordtree.keys.join(' ').chomp}' -- $cur ) )"
       puts indent + "  ;;"
 
       puts indent + "esac"
