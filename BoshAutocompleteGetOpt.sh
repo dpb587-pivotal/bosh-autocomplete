@@ -9,7 +9,6 @@ _BoshComplete ()   #  By convention, the function name
 
   case "${COMP_WORDS[1]}" in
     autocomplete)
-    return 0
     ;;
     backup)
     case "${COMP_WORDS[2]}" in
@@ -19,15 +18,12 @@ _BoshComplete ()   #  By convention, the function name
     esac
     ;;
     diff)
-    return 0
     ;;
     blobs)
-    return 0
     ;;
     add)
     case "${COMP_WORDS[2]}" in
       blob)
-      return 0
       ;;
       *)
         COMPREPLY=( $( compgen -W 'blob' -- $cur ) )
@@ -37,7 +33,6 @@ _BoshComplete ()   #  By convention, the function name
     upload)
     case "${COMP_WORDS[2]}" in
       blobs)
-      return 0
       ;;
       release)
       case "${COMP_WORDS[3]}" in
@@ -61,7 +56,6 @@ _BoshComplete ()   #  By convention, the function name
     sync)
     case "${COMP_WORDS[2]}" in
       blobs)
-      return 0
       ;;
       *)
         COMPREPLY=( $( compgen -W 'blobs' -- $cur ) )
@@ -69,12 +63,10 @@ _BoshComplete ()   #  By convention, the function name
     esac
     ;;
     cloud-config)
-    return 0
     ;;
     update)
     case "${COMP_WORDS[2]}" in
       cloud-config)
-      return 0
       ;;
       *)
         COMPREPLY=( $( compgen -W 'cloud-config' -- $cur ) )
@@ -89,15 +81,12 @@ _BoshComplete ()   #  By convention, the function name
     esac
     ;;
     complete)
-    return 0
     ;;
     deployment)
-    return 0
     ;;
     edit)
     case "${COMP_WORDS[2]}" in
       deployment)
-      return 0
       ;;
       *)
         COMPREPLY=( $( compgen -W 'deployment' -- $cur ) )
@@ -121,7 +110,6 @@ _BoshComplete ()   #  By convention, the function name
       esac
       ;;
       disk)
-      return 0
       ;;
       release)
       case "${COMP_WORDS[3]}" in
@@ -131,10 +119,8 @@ _BoshComplete ()   #  By convention, the function name
       esac
       ;;
       snapshot)
-      return 0
       ;;
       snapshots)
-      return 0
       ;;
       stemcell)
       case "${COMP_WORDS[3]}" in
@@ -144,7 +130,6 @@ _BoshComplete ()   #  By convention, the function name
       esac
       ;;
       user)
-      return 0
       ;;
       *)
         COMPREPLY=( $( compgen -W 'deployment disk release snapshot snapshots stemcell user' -- $cur ) )
@@ -154,7 +139,6 @@ _BoshComplete ()   #  By convention, the function name
     validate)
     case "${COMP_WORDS[2]}" in
       jobs)
-      return 0
       ;;
       *)
         COMPREPLY=( $( compgen -W 'jobs' -- $cur ) )
@@ -162,17 +146,14 @@ _BoshComplete ()   #  By convention, the function name
     esac
     ;;
     deployments)
-    return 0
     ;;
     download)
     case "${COMP_WORDS[2]}" in
       manifest)
-      return 0
       ;;
       public)
       case "${COMP_WORDS[3]}" in
         stemcell)
-        return 0
         ;;
         *)
           COMPREPLY=( $( compgen -W 'stemcell' -- $cur ) )
@@ -192,7 +173,6 @@ _BoshComplete ()   #  By convention, the function name
     esac
     ;;
     errands)
-    return 0
     ;;
     run)
     case "${COMP_WORDS[2]}" in
@@ -225,10 +205,8 @@ _BoshComplete ()   #  By convention, the function name
     generate)
     case "${COMP_WORDS[2]}" in
       job)
-      return 0
       ;;
       package)
-      return 0
       ;;
       *)
         COMPREPLY=( $( compgen -W 'job package' -- $cur ) )
@@ -278,7 +256,6 @@ _BoshComplete ()   #  By convention, the function name
     esac
     ;;
     locks)
-    return 0
     ;;
     logs)
     case "${COMP_WORDS[2]}" in
@@ -288,15 +265,12 @@ _BoshComplete ()   #  By convention, the function name
     esac
     ;;
     login)
-    return 0
     ;;
     logout)
-    return 0
     ;;
     cleanup)
     case "${COMP_WORDS[2]}" in
       ssh)
-      return 0
       ;;
       *)
         COMPREPLY=( $( compgen -W ' --all ssh' -- $cur ) )
@@ -304,7 +278,6 @@ _BoshComplete ()   #  By convention, the function name
     esac
     ;;
     version)
-    return 0
     ;;
     status)
     case "${COMP_WORDS[2]}" in
@@ -321,18 +294,14 @@ _BoshComplete ()   #  By convention, the function name
     esac
     ;;
     targets)
-    return 0
     ;;
     alias)
-    return 0
     ;;
     aliases)
-    return 0
     ;;
     set)
     case "${COMP_WORDS[2]}" in
       property)
-      return 0
       ;;
       *)
         COMPREPLY=( $( compgen -W 'property' -- $cur ) )
@@ -342,7 +311,6 @@ _BoshComplete ()   #  By convention, the function name
     unset)
     case "${COMP_WORDS[2]}" in
       property)
-      return 0
       ;;
       *)
         COMPREPLY=( $( compgen -W 'property' -- $cur ) )
@@ -352,7 +320,6 @@ _BoshComplete ()   #  By convention, the function name
     get)
     case "${COMP_WORDS[2]}" in
       property)
-      return 0
       ;;
       *)
         COMPREPLY=( $( compgen -W 'property' -- $cur ) )
@@ -376,7 +343,6 @@ _BoshComplete ()   #  By convention, the function name
       esac
       ;;
       user)
-      return 0
       ;;
       *)
         COMPREPLY=( $( compgen -W 'release user' -- $cur ) )
@@ -386,7 +352,6 @@ _BoshComplete ()   #  By convention, the function name
     export)
     case "${COMP_WORDS[2]}" in
       release)
-      return 0
       ;;
       *)
         COMPREPLY=( $( compgen -W 'release' -- $cur ) )
@@ -424,7 +389,6 @@ _BoshComplete ()   #  By convention, the function name
     inspect)
     case "${COMP_WORDS[2]}" in
       release)
-      return 0
       ;;
       *)
         COMPREPLY=( $( compgen -W 'release' -- $cur ) )
@@ -441,7 +405,6 @@ _BoshComplete ()   #  By convention, the function name
     reset)
     case "${COMP_WORDS[2]}" in
       release)
-      return 0
       ;;
       *)
         COMPREPLY=( $( compgen -W 'release' -- $cur ) )
@@ -451,10 +414,8 @@ _BoshComplete ()   #  By convention, the function name
     verify)
     case "${COMP_WORDS[2]}" in
       release)
-      return 0
       ;;
       stemcell)
-      return 0
       ;;
       *)
         COMPREPLY=( $( compgen -W 'release stemcell' -- $cur ) )
@@ -462,12 +423,10 @@ _BoshComplete ()   #  By convention, the function name
     esac
     ;;
     snapshots)
-    return 0
     ;;
     take)
     case "${COMP_WORDS[2]}" in
       snapshot)
-      return 0
       ;;
       *)
         COMPREPLY=( $( compgen -W 'snapshot' -- $cur ) )
@@ -489,7 +448,6 @@ _BoshComplete ()   #  By convention, the function name
     esac
     ;;
     stemcells)
-    return 0
     ;;
     public)
     case "${COMP_WORDS[2]}" in
@@ -529,7 +487,6 @@ _BoshComplete ()   #  By convention, the function name
     cancel)
     case "${COMP_WORDS[2]}" in
       task)
-      return 0
       ;;
       *)
         COMPREPLY=( $( compgen -W 'task' -- $cur ) )
@@ -539,7 +496,6 @@ _BoshComplete ()   #  By convention, the function name
     vm)
     case "${COMP_WORDS[2]}" in
       resurrection)
-      return 0
       ;;
       *)
         COMPREPLY=( $( compgen -W 'resurrection' -- $cur ) )
@@ -556,10 +512,8 @@ _BoshComplete ()   #  By convention, the function name
     micro)
     case "${COMP_WORDS[2]}" in
       deployment)
-      return 0
       ;;
       status)
-      return 0
       ;;
       deploy)
       case "${COMP_WORDS[3]}" in
@@ -569,16 +523,12 @@ _BoshComplete ()   #  By convention, the function name
       esac
       ;;
       delete)
-      return 0
       ;;
       deployments)
-      return 0
       ;;
       agent)
-      return 0
       ;;
       apply)
-      return 0
       ;;
       *)
         COMPREPLY=( $( compgen -W ' deployment status deploy delete deployments agent apply' -- $cur ) )
@@ -590,10 +540,8 @@ _BoshComplete ()   #  By convention, the function name
       bootstrap)
       case "${COMP_WORDS[3]}" in
         micro)
-        return 0
         ;;
         bosh)
-        return 0
         ;;
         *)
           COMPREPLY=( $( compgen -W 'micro bosh' -- $cur ) )
@@ -603,13 +551,10 @@ _BoshComplete ()   #  By convention, the function name
       generate)
       case "${COMP_WORDS[3]}" in
         micro_bosh)
-        return 0
         ;;
         bosh)
-        return 0
         ;;
         bat)
-        return 0
         ;;
         *)
           COMPREPLY=( $( compgen -W 'micro_bosh bosh bat' -- $cur ) )
@@ -619,15 +564,12 @@ _BoshComplete ()   #  By convention, the function name
       create)
       case "${COMP_WORDS[3]}" in
         s3)
-        return 0
         ;;
         key_pairs)
-        return 0
         ;;
         route53)
         case "${COMP_WORDS[4]}" in
           records)
-          return 0
           ;;
           *)
             COMPREPLY=( $( compgen -W 'records' -- $cur ) )
@@ -635,7 +577,6 @@ _BoshComplete ()   #  By convention, the function name
         esac
         ;;
         vpc)
-        return 0
         ;;
         *)
           COMPREPLY=( $( compgen -W ' --trace s3 key_pairs route53 vpc' -- $cur ) )
@@ -643,7 +584,6 @@ _BoshComplete ()   #  By convention, the function name
       esac
       ;;
       destroy)
-      return 0
       ;;
       *)
         COMPREPLY=( $( compgen -W ' bootstrap generate create destroy' -- $cur ) )

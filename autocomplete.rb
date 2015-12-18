@@ -63,8 +63,6 @@ EOF
       indent = '  ' + ' ' * ((level - 1) * 2)
 
       if 1 == wordtree.keys.length && wordtree.has_key?('')
-        puts indent + "return 0"
-
         return
       end
 
