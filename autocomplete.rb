@@ -1,14 +1,18 @@
 # Copyright (c) 2009-2012 VMware, Inc.
 
 module Bosh::Cli::Command
-  class Autocomplete < Base
+  class ShellCompletion < Base
+    usage "shell-completion"
+    desc "Generate script for shells supporting command completion."
+    def exec
+      say "#"
+      say "# Install this script in your shell to auto-complete your BOSH commands."
+      say "# "
+      say "# bash ~4.0: source <( bosh shell-completion )"
+      say "# bash ~3.0: bosh shell-completion | source /dev/stdin"
+      say "#"
+      say ""
 
-    # bosh help: shows either a high level help message or drills down to a
-    # specific area (release, deployment etc)
-    usage "autocomplete"
-    desc "Generate autocompletion shell script"
-
-    def autocomplete()
       wordtree = build_wordtree
 
       print_header
@@ -46,8 +50,8 @@ module Bosh::Cli::Command
 
 
     def print_header()
-      puts <<EOF
-_BoshComplete ()
+      say <<EOF
+_BoshShellCompletion()
 {
   local cur opts
 
@@ -64,25 +68,25 @@ EOF
         return
       end
 
-      puts indent + "case \"${COMP_WORDS[#{level}]}\" in"
+      say indent + "case \"${COMP_WORDS[#{level}]}\" in"
 
       wordtree.each do | word, children |
         next if children.empty?
 
-        puts indent + "  #{word})"
+        say indent + "  #{word})"
         print_wordtree(level + 1, children)
-        puts indent + "  ;;"
+        say indent + "  ;;"
       end
 
-      puts indent + "  *)"
-      puts indent + "    opts=\" #{wordtree.keys.join(' ').strip} \""
-      puts indent + "  ;;"
+      say indent + "  *)"
+      say indent + "    opts=\" #{wordtree.keys.join(' ').strip} \""
+      say indent + "  ;;"
 
-      puts indent + "esac"
+      say indent + "esac"
     end
 
     def print_footer()
-      puts <<EOF
+      say <<EOF
 
   for COMP_WORD in "${COMP_WORDS[@]}" ; do
     opts=${opts/ $COMP_WORD / }
@@ -93,7 +97,7 @@ EOF
   return 0
 }
 
-complete -F _BoshComplete bo bosh -o filenames
+complete -F _BoshShellCompletion bo bosh -o filenames
 EOF
     end
   end
