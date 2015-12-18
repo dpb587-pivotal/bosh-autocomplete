@@ -11,6 +11,16 @@ _BoshComplete ()   #  By convention, the function name
   cur=${COMP_WORDS[COMP_CWORD]}
 
   case "${COMP_WORDS[1]}" in
+    create)
+      case "${COMP_WORDS[2]}" in
+        release)
+          COMPREPLY=( $( compgen -W '--force --with-tarball --final' -- $cur ) )
+          ;;
+        *)
+          COMPREPLY=( $( compgen -W 'release user' -- $cur ) )
+          ;;
+      esac
+      ;;
     vms)
       COMPREPLY=( $( compgen -W '--details --dns --vitals' -- $cur ) )
       ;;
