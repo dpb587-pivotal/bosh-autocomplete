@@ -1,10 +1,8 @@
-_BoshComplete ()   #  By convention, the function name
-{                 #+ starts with an underscore.
-  local cur
-  # Pointer to current completion word.
-  # By convention, it's named "cur" but this isn't strictly necessary.
+_BoshComplete ()
+{
+  local cur opts
 
-  COMPREPLY=()   # Array variable storing the possible completions.
+  COMPREPLY=()
   cur=${COMP_WORDS[COMP_CWORD]}
 
   case "${COMP_WORDS[1]}" in
@@ -13,7 +11,7 @@ _BoshComplete ()   #  By convention, the function name
     backup)
     case "${COMP_WORDS[2]}" in
       *)
-        COMPREPLY=( $( compgen -W ' --force' -- $cur ) )
+        opts=" --force "
       ;;
     esac
     ;;
@@ -26,7 +24,7 @@ _BoshComplete ()   #  By convention, the function name
       blob)
       ;;
       *)
-        COMPREPLY=( $( compgen -W 'blob' -- $cur ) )
+        opts=" blob "
       ;;
     esac
     ;;
@@ -37,19 +35,19 @@ _BoshComplete ()   #  By convention, the function name
       release)
       case "${COMP_WORDS[3]}" in
         *)
-          COMPREPLY=( $( compgen -W ' --rebase --skip-if-exists --dir --sha1 --name --version --fix' -- $cur ) )
+          opts=" --rebase --skip-if-exists --dir --sha1 --name --version --fix "
         ;;
       esac
       ;;
       stemcell)
       case "${COMP_WORDS[3]}" in
         *)
-          COMPREPLY=( $( compgen -W ' --skip-if-exists --fix --sha1 --name --version' -- $cur ) )
+          opts=" --skip-if-exists --fix --sha1 --name --version "
         ;;
       esac
       ;;
       *)
-        COMPREPLY=( $( compgen -W 'blobs release stemcell' -- $cur ) )
+        opts=" blobs release stemcell "
       ;;
     esac
     ;;
@@ -58,7 +56,7 @@ _BoshComplete ()   #  By convention, the function name
       blobs)
       ;;
       *)
-        COMPREPLY=( $( compgen -W 'blobs' -- $cur ) )
+        opts=" blobs "
       ;;
     esac
     ;;
@@ -69,14 +67,14 @@ _BoshComplete ()   #  By convention, the function name
       cloud-config)
       ;;
       *)
-        COMPREPLY=( $( compgen -W 'cloud-config' -- $cur ) )
+        opts=" cloud-config "
       ;;
     esac
     ;;
     cloudcheck)
     case "${COMP_WORDS[2]}" in
       *)
-        COMPREPLY=( $( compgen -W ' --auto --report' -- $cur ) )
+        opts=" --auto --report "
       ;;
     esac
     ;;
@@ -89,14 +87,14 @@ _BoshComplete ()   #  By convention, the function name
       deployment)
       ;;
       *)
-        COMPREPLY=( $( compgen -W 'deployment' -- $cur ) )
+        opts=" deployment "
       ;;
     esac
     ;;
     deploy)
     case "${COMP_WORDS[2]}" in
       *)
-        COMPREPLY=( $( compgen -W ' --recreate --redact-diff --skip-drain' -- $cur ) )
+        opts=" --recreate --redact-diff --skip-drain "
       ;;
     esac
     ;;
@@ -105,7 +103,7 @@ _BoshComplete ()   #  By convention, the function name
       deployment)
       case "${COMP_WORDS[3]}" in
         *)
-          COMPREPLY=( $( compgen -W ' --force' -- $cur ) )
+          opts=" --force "
         ;;
       esac
       ;;
@@ -114,7 +112,7 @@ _BoshComplete ()   #  By convention, the function name
       release)
       case "${COMP_WORDS[3]}" in
         *)
-          COMPREPLY=( $( compgen -W ' --force' -- $cur ) )
+          opts=" --force "
         ;;
       esac
       ;;
@@ -125,14 +123,14 @@ _BoshComplete ()   #  By convention, the function name
       stemcell)
       case "${COMP_WORDS[3]}" in
         *)
-          COMPREPLY=( $( compgen -W ' --force' -- $cur ) )
+          opts=" --force "
         ;;
       esac
       ;;
       user)
       ;;
       *)
-        COMPREPLY=( $( compgen -W 'deployment disk release snapshot snapshots stemcell user' -- $cur ) )
+        opts=" deployment disk release snapshot snapshots stemcell user "
       ;;
     esac
     ;;
@@ -141,7 +139,7 @@ _BoshComplete ()   #  By convention, the function name
       jobs)
       ;;
       *)
-        COMPREPLY=( $( compgen -W 'jobs' -- $cur ) )
+        opts=" jobs "
       ;;
     esac
     ;;
@@ -156,19 +154,19 @@ _BoshComplete ()   #  By convention, the function name
         stemcell)
         ;;
         *)
-          COMPREPLY=( $( compgen -W 'stemcell' -- $cur ) )
+          opts=" stemcell "
         ;;
       esac
       ;;
       *)
-        COMPREPLY=( $( compgen -W 'manifest public' -- $cur ) )
+        opts=" manifest public "
       ;;
     esac
     ;;
     disks)
     case "${COMP_WORDS[2]}" in
       *)
-        COMPREPLY=( $( compgen -W ' --orphaned' -- $cur ) )
+        opts=" --orphaned "
       ;;
     esac
     ;;
@@ -179,26 +177,26 @@ _BoshComplete ()   #  By convention, the function name
       errand)
       case "${COMP_WORDS[3]}" in
         *)
-          COMPREPLY=( $( compgen -W ' --download-logs --logs-dir --keep-alive' -- $cur ) )
+          opts=" --download-logs --logs-dir --keep-alive "
         ;;
       esac
       ;;
       *)
-        COMPREPLY=( $( compgen -W 'errand' -- $cur ) )
+        opts=" errand "
       ;;
     esac
     ;;
     help)
     case "${COMP_WORDS[2]}" in
       *)
-        COMPREPLY=( $( compgen -W ' --all' -- $cur ) )
+        opts=" --all "
       ;;
     esac
     ;;
     instances)
     case "${COMP_WORDS[2]}" in
       *)
-        COMPREPLY=( $( compgen -W ' --details --dns --vitals --ps --failing' -- $cur ) )
+        opts=" --details --dns --vitals --ps --failing "
       ;;
     esac
     ;;
@@ -209,35 +207,35 @@ _BoshComplete ()   #  By convention, the function name
       package)
       ;;
       *)
-        COMPREPLY=( $( compgen -W 'job package' -- $cur ) )
+        opts=" job package "
       ;;
     esac
     ;;
     start)
     case "${COMP_WORDS[2]}" in
       *)
-        COMPREPLY=( $( compgen -W ' --force' -- $cur ) )
+        opts=" --force "
       ;;
     esac
     ;;
     stop)
     case "${COMP_WORDS[2]}" in
       *)
-        COMPREPLY=( $( compgen -W ' --soft --hard --force --skip-drain' -- $cur ) )
+        opts=" --soft --hard --force --skip-drain "
       ;;
     esac
     ;;
     restart)
     case "${COMP_WORDS[2]}" in
       *)
-        COMPREPLY=( $( compgen -W ' --force --skip-drain' -- $cur ) )
+        opts=" --force --skip-drain "
       ;;
     esac
     ;;
     recreate)
     case "${COMP_WORDS[2]}" in
       *)
-        COMPREPLY=( $( compgen -W ' --force --skip-drain' -- $cur ) )
+        opts=" --force --skip-drain "
       ;;
     esac
     ;;
@@ -246,12 +244,12 @@ _BoshComplete ()   #  By convention, the function name
       job)
       case "${COMP_WORDS[3]}" in
         *)
-          COMPREPLY=( $( compgen -W ' --force' -- $cur ) )
+          opts=" --force "
         ;;
       esac
       ;;
       *)
-        COMPREPLY=( $( compgen -W 'job' -- $cur ) )
+        opts=" job "
       ;;
     esac
     ;;
@@ -260,7 +258,7 @@ _BoshComplete ()   #  By convention, the function name
     logs)
     case "${COMP_WORDS[2]}" in
       *)
-        COMPREPLY=( $( compgen -W ' --agent --job --only --dir --all' -- $cur ) )
+        opts=" --agent --job --only --dir --all "
       ;;
     esac
     ;;
@@ -273,7 +271,7 @@ _BoshComplete ()   #  By convention, the function name
       ssh)
       ;;
       *)
-        COMPREPLY=( $( compgen -W ' --all ssh' -- $cur ) )
+        opts=" --all ssh "
       ;;
     esac
     ;;
@@ -282,14 +280,14 @@ _BoshComplete ()   #  By convention, the function name
     status)
     case "${COMP_WORDS[2]}" in
       *)
-        COMPREPLY=( $( compgen -W ' --uuid' -- $cur ) )
+        opts=" --uuid "
       ;;
     esac
     ;;
     target)
     case "${COMP_WORDS[2]}" in
       *)
-        COMPREPLY=( $( compgen -W ' --ca-cert' -- $cur ) )
+        opts=" --ca-cert "
       ;;
     esac
     ;;
@@ -304,7 +302,7 @@ _BoshComplete ()   #  By convention, the function name
       property)
       ;;
       *)
-        COMPREPLY=( $( compgen -W 'property' -- $cur ) )
+        opts=" property "
       ;;
     esac
     ;;
@@ -313,7 +311,7 @@ _BoshComplete ()   #  By convention, the function name
       property)
       ;;
       *)
-        COMPREPLY=( $( compgen -W 'property' -- $cur ) )
+        opts=" property "
       ;;
     esac
     ;;
@@ -322,14 +320,14 @@ _BoshComplete ()   #  By convention, the function name
       property)
       ;;
       *)
-        COMPREPLY=( $( compgen -W 'property' -- $cur ) )
+        opts=" property "
       ;;
     esac
     ;;
     properties)
     case "${COMP_WORDS[2]}" in
       *)
-        COMPREPLY=( $( compgen -W ' --terse' -- $cur ) )
+        opts=" --terse "
       ;;
     esac
     ;;
@@ -338,14 +336,14 @@ _BoshComplete ()   #  By convention, the function name
       release)
       case "${COMP_WORDS[3]}" in
         *)
-          COMPREPLY=( $( compgen -W ' --force --final --with-tarball --dry-run --name --version --dir --timestamp-version' -- $cur ) )
+          opts=" --force --final --with-tarball --dry-run --name --version --dir --timestamp-version "
         ;;
       esac
       ;;
       user)
       ;;
       *)
-        COMPREPLY=( $( compgen -W 'release user' -- $cur ) )
+        opts=" release user "
       ;;
     esac
     ;;
@@ -354,7 +352,7 @@ _BoshComplete ()   #  By convention, the function name
       release)
       ;;
       *)
-        COMPREPLY=( $( compgen -W 'release' -- $cur ) )
+        opts=" release "
       ;;
     esac
     ;;
@@ -363,12 +361,12 @@ _BoshComplete ()   #  By convention, the function name
       release)
       case "${COMP_WORDS[3]}" in
         *)
-          COMPREPLY=( $( compgen -W ' --dry-run --name --version' -- $cur ) )
+          opts=" --dry-run --name --version "
         ;;
       esac
       ;;
       *)
-        COMPREPLY=( $( compgen -W 'release' -- $cur ) )
+        opts=" release "
       ;;
     esac
     ;;
@@ -377,12 +375,12 @@ _BoshComplete ()   #  By convention, the function name
       release)
       case "${COMP_WORDS[3]}" in
         *)
-          COMPREPLY=( $( compgen -W ' --git' -- $cur ) )
+          opts=" --git "
         ;;
       esac
       ;;
       *)
-        COMPREPLY=( $( compgen -W 'release' -- $cur ) )
+        opts=" release "
       ;;
     esac
     ;;
@@ -391,14 +389,14 @@ _BoshComplete ()   #  By convention, the function name
       release)
       ;;
       *)
-        COMPREPLY=( $( compgen -W 'release' -- $cur ) )
+        opts=" release "
       ;;
     esac
     ;;
     releases)
     case "${COMP_WORDS[2]}" in
       *)
-        COMPREPLY=( $( compgen -W ' --jobs' -- $cur ) )
+        opts=" --jobs "
       ;;
     esac
     ;;
@@ -407,7 +405,7 @@ _BoshComplete ()   #  By convention, the function name
       release)
       ;;
       *)
-        COMPREPLY=( $( compgen -W 'release' -- $cur ) )
+        opts=" release "
       ;;
     esac
     ;;
@@ -418,7 +416,7 @@ _BoshComplete ()   #  By convention, the function name
       stemcell)
       ;;
       *)
-        COMPREPLY=( $( compgen -W 'release stemcell' -- $cur ) )
+        opts=" release stemcell "
       ;;
     esac
     ;;
@@ -429,21 +427,21 @@ _BoshComplete ()   #  By convention, the function name
       snapshot)
       ;;
       *)
-        COMPREPLY=( $( compgen -W 'snapshot' -- $cur ) )
+        opts=" snapshot "
       ;;
     esac
     ;;
     ssh)
     case "${COMP_WORDS[2]}" in
       *)
-        COMPREPLY=( $( compgen -W ' --gateway_host --gateway_user --gateway_identity_file --default_password --strict_host_key_checking --no_gateway' -- $cur ) )
+        opts=" --gateway_host --gateway_user --gateway_identity_file --default_password --strict_host_key_checking --no_gateway "
       ;;
     esac
     ;;
     scp)
     case "${COMP_WORDS[2]}" in
       *)
-        COMPREPLY=( $( compgen -W ' --download --upload --gateway_host --gateway_user --gateway_identity_file --no_gateway' -- $cur ) )
+        opts=" --download --upload --gateway_host --gateway_user --gateway_identity_file --no_gateway "
       ;;
     esac
     ;;
@@ -454,19 +452,19 @@ _BoshComplete ()   #  By convention, the function name
       stemcells)
       case "${COMP_WORDS[3]}" in
         *)
-          COMPREPLY=( $( compgen -W ' --full --all' -- $cur ) )
+          opts=" --full --all "
         ;;
       esac
       ;;
       *)
-        COMPREPLY=( $( compgen -W 'stemcells' -- $cur ) )
+        opts=" stemcells "
       ;;
     esac
     ;;
     task)
     case "${COMP_WORDS[2]}" in
       *)
-        COMPREPLY=( $( compgen -W ' --event --cpi --debug --result --raw --no-filter' -- $cur ) )
+        opts=" --event --cpi --debug --result --raw --no-filter "
       ;;
     esac
     ;;
@@ -475,12 +473,12 @@ _BoshComplete ()   #  By convention, the function name
       recent)
       case "${COMP_WORDS[3]}" in
         *)
-          COMPREPLY=( $( compgen -W ' --no-filter' -- $cur ) )
+          opts=" --no-filter "
         ;;
       esac
       ;;
       *)
-        COMPREPLY=( $( compgen -W ' --no-filter recent' -- $cur ) )
+        opts=" --no-filter recent "
       ;;
     esac
     ;;
@@ -489,7 +487,7 @@ _BoshComplete ()   #  By convention, the function name
       task)
       ;;
       *)
-        COMPREPLY=( $( compgen -W 'task' -- $cur ) )
+        opts=" task "
       ;;
     esac
     ;;
@@ -498,14 +496,14 @@ _BoshComplete ()   #  By convention, the function name
       resurrection)
       ;;
       *)
-        COMPREPLY=( $( compgen -W 'resurrection' -- $cur ) )
+        opts=" resurrection "
       ;;
     esac
     ;;
     vms)
     case "${COMP_WORDS[2]}" in
       *)
-        COMPREPLY=( $( compgen -W ' --details --dns --vitals' -- $cur ) )
+        opts=" --details --dns --vitals "
       ;;
     esac
     ;;
@@ -518,7 +516,7 @@ _BoshComplete ()   #  By convention, the function name
       deploy)
       case "${COMP_WORDS[3]}" in
         *)
-          COMPREPLY=( $( compgen -W ' --update --update-if-exists' -- $cur ) )
+          opts=" --update --update-if-exists "
         ;;
       esac
       ;;
@@ -531,7 +529,7 @@ _BoshComplete ()   #  By convention, the function name
       apply)
       ;;
       *)
-        COMPREPLY=( $( compgen -W ' deployment status deploy delete deployments agent apply' -- $cur ) )
+        opts=" deployment status deploy delete deployments agent apply "
       ;;
     esac
     ;;
@@ -544,7 +542,7 @@ _BoshComplete ()   #  By convention, the function name
         bosh)
         ;;
         *)
-          COMPREPLY=( $( compgen -W 'micro bosh' -- $cur ) )
+          opts=" micro bosh "
         ;;
       esac
       ;;
@@ -557,7 +555,7 @@ _BoshComplete ()   #  By convention, the function name
         bat)
         ;;
         *)
-          COMPREPLY=( $( compgen -W 'micro_bosh bosh bat' -- $cur ) )
+          opts=" micro_bosh bosh bat "
         ;;
       esac
       ;;
@@ -572,28 +570,34 @@ _BoshComplete ()   #  By convention, the function name
           records)
           ;;
           *)
-            COMPREPLY=( $( compgen -W 'records' -- $cur ) )
+            opts=" records "
           ;;
         esac
         ;;
         vpc)
         ;;
         *)
-          COMPREPLY=( $( compgen -W ' --trace s3 key_pairs route53 vpc' -- $cur ) )
+          opts=" --trace s3 key_pairs route53 vpc "
         ;;
       esac
       ;;
       destroy)
       ;;
       *)
-        COMPREPLY=( $( compgen -W ' bootstrap generate create destroy' -- $cur ) )
+        opts=" bootstrap generate create destroy "
       ;;
     esac
     ;;
     *)
-      COMPREPLY=( $( compgen -W 'autocomplete backup diff blobs add upload sync cloud-config update cloudcheck complete deployment edit deploy delete validate deployments download disks errands run help instances generate start stop restart recreate rename locks logs login logout cleanup version status target targets alias aliases set unset get properties create export finalize init inspect releases reset verify snapshots take ssh scp stemcells public task tasks cancel vm vms micro aws' -- $cur ) )
+      opts=" autocomplete backup diff blobs add upload sync cloud-config update cloudcheck complete deployment edit deploy delete validate deployments download disks errands run help instances generate start stop restart recreate rename locks logs login logout cleanup version status target targets alias aliases set unset get properties create export finalize init inspect releases reset verify snapshots take ssh scp stemcells public task tasks cancel vm vms micro aws "
     ;;
   esac
+
+  for COMP_WORD in "${COMP_WORDS[@]}" ; do
+    opts=${opts/ $COMP_WORD / }
+  done
+
+  COMPREPLY=( $( compgen -W "$opts" -- $cur ) )
 
   return 0
 }

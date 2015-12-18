@@ -47,13 +47,11 @@ module Bosh::Cli::Command
 
     def print_header()
       puts <<EOF
-_BoshComplete ()   #  By convention, the function name
-{                 #+ starts with an underscore.
-  local cur
-  # Pointer to current completion word.
-  # By convention, it's named "cur" but this isn't strictly necessary.
+_BoshComplete ()
+{
+  local cur opts
 
-  COMPREPLY=()   # Array variable storing the possible completions.
+  COMPREPLY=()
   cur=${COMP_WORDS[COMP_CWORD]}
 
 EOF
@@ -77,7 +75,7 @@ EOF
       end
 
       puts indent + "  *)"
-      puts indent + "    COMPREPLY=( $( compgen -W '#{wordtree.keys.join(' ').chomp}' -- $cur ) )"
+      puts indent + "    opts=\" #{wordtree.keys.join(' ').strip} \""
       puts indent + "  ;;"
 
       puts indent + "esac"
@@ -85,6 +83,12 @@ EOF
 
     def print_footer()
       puts <<EOF
+
+  for COMP_WORD in "${COMP_WORDS[@]}" ; do
+    opts=${opts/ $COMP_WORD / }
+  done
+
+  COMPREPLY=( $( compgen -W "$opts" -- $cur ) )
 
   return 0
 }
